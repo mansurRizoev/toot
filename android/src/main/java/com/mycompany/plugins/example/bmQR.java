@@ -91,31 +91,31 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
         package_name = getApplication().getPackageName();
 
         String dt = intent.getStringExtra("LNG");
+        String fromGallery = intent.getStringExtra("fromGallery");
         if ("tj".equalsIgnoreCase(dt)) {
             get_img_btn.setText("Боргирии QR аз галерея");
         } else if ("ru".equalsIgnoreCase(dt)) {
             get_img_btn.setText("QR загрузить с галереи");
         }
 
-        // Запрос на разрешение камеры
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, ZXING_CAMERA_PERMISSION);
         }
 
-        // Настраиваем ActivityResult launchers
         initializeActivityResultLaunchers();
 
-        // Обработчики кнопок
         close_btn.setOnClickListener(v -> finish());
+        if(fromGallery != null && "yes".equalsIgnoreCase(fromGallery)) {
+            get_img_btn.setVisibility(View.VISIBLE);  
+            get_img_btn.setOnClickListener(view -> requestPermissions());
+        } else {
+            get_img_btn.setVisibility(View.GONE);  
+        }
 
-        get_img_btn.setOnClickListener(view -> requestPermissions());
-
-        // Инициализируем CaptureManager
         capture = new CaptureManager(this, barcodeScannerView);
         capture.initializeFromIntent(intent, savedInstanceState);
         capture.setShowMissingCameraPermissionDialog(false);
 
-        // Запускаем сканирование
         startScanning();
     }
 

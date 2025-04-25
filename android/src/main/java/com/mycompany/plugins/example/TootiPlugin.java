@@ -21,8 +21,10 @@ public class TootiPlugin extends Plugin {
     @PluginMethod
     public void echo(PluginCall call) {
         String value = call.getString("value");
+        String fromGallery = call.getString("fromGallery");
         Intent intent = new Intent(getActivity(), bmQR.class);
         intent.putExtra("LNG", value);
+        intent.putExtra("fromGallery", fromGallery);
 
         startActivityForResult(call, intent, "handleQrResult");
 
