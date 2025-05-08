@@ -123,7 +123,6 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
         barcodeScannerView.decodeContinuous(new BarcodeCallback() {
             @Override
             public void barcodeResult(BarcodeResult result) {
-                // Handle the result here
                 String qrResult = result.getText();
                 Log.d("Scanned: ", qrResult);
                 Intent resultIntent = new Intent();
@@ -134,8 +133,7 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
 
             @Override
             public void possibleResultPoints(List<ResultPoint> resultPoints) {
-                // You can handle the result points here if needed
-            }
+              
         });
     }
 
@@ -152,7 +150,6 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
                     Manifest.permission.ACCESS_COARSE_LOCATION
             });
         } else {
-            // Handle permissions for Android 11 and below
             requestPermissionsLauncher.launch(new String[]{
                     Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -190,11 +187,6 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
         return barcodeScannerView.onKeyDown(keyCode, event) || super.onKeyDown(keyCode, event);
     }
 
-    /**
-     * Check if the device's camera has a Flashlight.
-     *
-     * @return true if there is Flashlight, otherwise false.
-     */
     private boolean hasFlash() {
         return getApplicationContext().getPackageManager()
                 .hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH);
@@ -223,7 +215,6 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
     }
 
     private void initializeActivityResultLaunchers() {
-        // Register the permission request launcher
         requestPermissionsLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestMultiplePermissions(),
                 result -> {
@@ -239,7 +230,6 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
                     }
                 }
         );
-        // Register the gallery launcher
         galleryLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
 
@@ -300,8 +290,5 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
     public void onTorchOff() {
 
     }
-//    public String echo(String value) {
-//        Log.i("Echo", value);
-//        return value;
-//    }
+
 }

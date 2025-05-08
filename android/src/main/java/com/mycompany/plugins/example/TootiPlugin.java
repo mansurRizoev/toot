@@ -27,11 +27,6 @@ public class TootiPlugin extends Plugin {
         intent.putExtra("fromGallery", fromGallery);
 
         startActivityForResult(call, intent, "handleQrResult");
-
-
-//        JSObject ret = new JSObject();
-//        ret.put("value", implementation.echo(value));
-//        call.resolve(ret);
     }
     @ActivityCallback
     private void handleQrResult(PluginCall call,  ActivityResult result) {
