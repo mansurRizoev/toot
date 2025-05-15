@@ -132,7 +132,7 @@ public class bmQR extends AppCompatActivity implements DecoratedBarcodeView.Torc
             }
 
             @Override
-            public void possibleResultPoints(List<ResultPoint> resultPoints) {
+            public void possibleResultPoints(List<ResultPoint> resultPoints) {}
               
         });
     }
